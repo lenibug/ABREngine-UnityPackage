@@ -1,0 +1,15 @@
+{
+    "artifactData": {
+        "colormap": "colormap.xml"
+    },
+    "artist": "leni",
+    "class": "(test)",
+    "family": "leni",
+    "hidden": false,
+    "preview": "thumbnail.png",
+    "tags": [
+        ""
+    ],
+    "type": "colormap",
+    "uuid": "2ce0f03c-ab51-11ef-a0e6-0242ac110002"
+}

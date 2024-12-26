@@ -32,6 +32,7 @@ urlpatterns = [
     re_path('^remove-path/*', views.remove_path),
     path('remove/<str:value>', views.remove),
     path('visassets', views.list_visassets),
+    path('visassets/<str:uuid>/', views.modify_visasset, name='modify_visasset'),
     path('datasets', views.list_datasets),
     path('download-visasset/<str:uuid>', views.download_visasset),
     path('remove-visasset/<str:uuid>', views.remove_visasset),

@@ -1,0 +1,15 @@
+{
+    "artifactData": {
+        "colormap": "colormap.xml"
+    },
+    "artist": "leni",
+    "class": "Toffee",
+    "family": "leni",
+    "hidden": false,
+    "preview": "thumbnail.png",
+    "tags": [
+        "fauna"
+    ],
+    "type": "colormap",
+    "uuid": "c0bd8ed0-b3eb-11ef-8f5b-0242ac110002"
+}

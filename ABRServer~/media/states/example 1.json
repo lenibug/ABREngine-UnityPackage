@@ -1,0 +1,78 @@
+{
+    "version": "2023.9.0",
+    "impressions": {
+        "19a95eb8-f6bf-4547-9520-df312994f5fc": {
+            "plateType": "Glyphs",
+            "uuid": "19a95eb8-f6bf-4547-9520-df312994f5fc",
+            "name": "DensityRadius^5",
+            "inputValues": {
+                "Key Data": {
+                    "inputType": "IVLab.ABREngine.PointKeyData",
+                    "inputGenre": "KeyData",
+                    "inputValue": "Demo/Wavelet/KeyData/DensityRadius^5"
+                },
+                "Colormap": {
+                    "inputType": "IVLab.ABREngine.ColormapVisAsset",
+                    "inputGenre": "VisAsset",
+                    "inputValue": "66b3cde4-034d-11eb-a7e6-005056bae6d8"
+                },
+                "Glyph": {
+                    "inputType": "IVLab.ABREngine.GlyphVisAsset",
+                    "inputGenre": "VisAsset",
+                    "inputValue": "01e6339c-c9b2-11ed-ab2c-005056bae6d8"
+                },
+                "Color Variable": {
+                    "inputType": "IVLab.ABREngine.ScalarDataVariable",
+                    "inputGenre": "Variable",
+                    "inputValue": "Demo/Wavelet/ScalarVar/YAxis"
+                },
+                "Glyph Variable": {
+                    "inputType": "IVLab.ABREngine.ScalarDataVariable",
+                    "inputGenre": "Variable",
+                    "inputValue": "Demo/Wavelet/ScalarVar/XAxis"
+                }
+            }
+        },
+        "22eb8ed4-9587-4b5e-a01f-a1a24112e669": {
+            "plateType": "Surfaces",
+            "uuid": "22eb8ed4-9587-4b5e-a01f-a1a24112e669",
+            "name": "RTData230",
+            "inputValues": {
+                "Pattern": {
+                    "inputType": "IVLab.ABREngine.SurfaceTextureVisAsset",
+                    "inputGenre": "VisAsset",
+                    "inputValue": "91095a14-72c5-11ea-bfdd-005056bae6d8"
+                },
+                "Colormap": {
+                    "inputType": "IVLab.ABREngine.ColormapVisAsset",
+                    "inputGenre": "VisAsset",
+                    "inputValue": "5a761a72-8bcb-11ea-9265-005056bae6d8"
+                },
+                "Key Data": {
+                    "inputType": "IVLab.ABREngine.SurfaceKeyData",
+                    "inputGenre": "KeyData",
+                    "inputValue": "Demo/Wavelet/KeyData/RTData230"
+                }
+            }
+        }
+    },
+    "uiData": {
+        "compose": {
+            "impressionData": {
+                "19a95eb8-f6bf-4547-9520-df312994f5fc": {
+                    "position": {
+                        "top": 92.690625,
+                        "left": 658.5
+                    }
+                },
+                "22eb8ed4-9587-4b5e-a01f-a1a24112e669": {
+                    "position": {
+                        "top": 231.08125,
+                        "left": 308.5
+                    }
+                }
+            }
+        }
+    },
+    "name": "example 1"
+}

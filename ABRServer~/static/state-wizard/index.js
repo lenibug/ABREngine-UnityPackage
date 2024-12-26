@@ -1,7 +1,7 @@
 import { DataPath } from '../common/DataPath.js';
 import { download } from '../common/helpers.js';
 
-// Map old EncodingRenderStrategies to new DataImpressions
+// Map old EncodingRenderStrategies to new Plates
 const strategiesToPlateTypes = {
     'SimpleGlyphEncodingRenderStrategy': 'Glyphs',
     'SimpleLineEncodingRenderStrategy': 'Ribbons',
@@ -133,7 +133,7 @@ function upgradeState(stateName, stateJson) {
     // Things that need to be redone from defaults
     // - Primitive inputs
 
-    let impressions = readDataImpressions(stateJson);
+    let impressions = readPlates(stateJson);
 
     // Automatically upgrade the impressions
     for (const impression of impressions) {
@@ -188,16 +188,16 @@ function populateWizardForm(stateName, stateJson) {
     // Add the state name
     $('#state-name').text(stateName);
 
-    let impressions = readDataImpressions(stateJson);
+    let impressions = readPlate(stateJson);
 
-    // Add all data impressions to the UI
+    // Add all plates to the UI
     for (const impression of impressions) {
         let variables = readVariables(impression, stateJson);
 
         let plateType = strategiesToPlateTypes[impression.type];
 
         let $impression = $('<div>', {
-            class: 'data-impression card',
+            class: 'plate card',
         }).append($('<header>').append(
             $('<span>', { text: impression.label })
         )).append(
@@ -380,20 +380,20 @@ function refreshDataRanges() {
 
 // Upgrade all the parts of an impression from 0.1.8 to 0.2.0 that can
 // be automatically done
-function upgradeImpressionAuto(dataImpression, stateJson) {
-    let uiDataForImpression = stateJson.ui[dataImpression.uuid];
-    let primitives = readPrimitives(dataImpression, stateJson);
+function upgradeImpressionAuto(plate, stateJson) {
+    let uiDataForImpression = stateJson.ui[plate.uuid];
+    let primitives = readPrimitives(plate, stateJson);
 
     // Populate the top-level data
     let newImpression = {};
-    newImpression.plateType = strategiesToPlateTypes[dataImpression.type];
-    newImpression.uuid = dataImpression.uuid;
-    newImpression.name = dataImpression.label;
+    newImpression.plateType = strategiesToPlateTypes[plate.type];
+    newImpression.uuid = plate.uuid;
+    newImpression.name = plate.label;
     newImpression.renderHints = {};
     newImpression.renderHints.visible = !uiDataForImpression.hidden;
     newImpression.inputValues = {};
 
-    for (var inputName in dataImpression.inputs) {
+    for (var inputName in plate.inputs) {
         // Check if the input name exists for this plate type
         let allInputsForPlateType = getSchemaInputNames(newImpression.plateType);
         if (Object.keys(inputNameMap).indexOf(inputName) >= 0) {
@@ -405,7 +405,7 @@ function upgradeImpressionAuto(dataImpression, stateJson) {
             continue;
         }
 
-        let oldInputUuid = dataImpression.inputs[inputName];
+        let oldInputUuid = plate.inputs[inputName];
 
         // We can only upgrade if it's a VisAsset, otherwise leave at
         // the default
@@ -431,19 +431,19 @@ function upgradeImpressionAuto(dataImpression, stateJson) {
     return newImpression;
 }
 
-function readDataImpressions(stateJson) {
+function readPlates(stateJson) {
     // Go through each composition node in the old state
     return stateJson.compositionNodes.filter((strat) => Object.keys(strategiesToPlateTypes).indexOf(strat.type) >= 0);
 }
 
-function readVariables(dataImpression, stateJson) {
+function readVariables(plate, stateJson) {
     let compNodeUuids = stateJson.compositionNodes.map((node) => node.uuid);
     let dataNodeUuids = stateJson.dataNodes.map((node) => node.uuid);
 
     let variables = {};
-    for (const inputName in dataImpression.inputs) {
+    for (const inputName in plate.inputs) {
         // Find the variable in dataNodes or comp nodes
-        let inputUuid = dataImpression.inputs[inputName];
+        let inputUuid = plate.inputs[inputName];
         let inputIndexComp = compNodeUuids.indexOf(inputUuid);
         let inputIndexData = dataNodeUuids.indexOf(inputUuid);
         if (inputIndexData >= 0) {
@@ -467,11 +467,11 @@ function readVariables(dataImpression, stateJson) {
     return variables;
 }
 
-function readPrimitives(dataImpression, stateJson) {
+function readPrimitives(plate, stateJson) {
     let compNodeUuids = stateJson.compositionNodes.map((node) => node.uuid);
 
     let primitives = {};
-    for (const inputName in dataImpression.inputs) {
+    for (const inputName in plate.inputs) {
         // Find the primitive in compositionNodes
         let inputUuid = dataImpression.inputs[inputName];
         let inputIndex = compNodeUuids.indexOf(inputUuid);

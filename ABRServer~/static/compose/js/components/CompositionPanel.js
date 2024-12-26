@@ -37,7 +37,7 @@ export function CompositionPanel() {
         text: 'Visualization Composition',
     }));
 
-    // The composition data impressions are loaded here
+    // The composition plates are loaded here
     let $loader = $('<div>', {
         id: COMPOSITION_LOADER_ID,
     });
@@ -59,13 +59,13 @@ export function CompositionPanel() {
             "ui-droppable-hover": "trash-droppable-hover"
         },
         drop: (_evt, ui) => {
-            let uuidDataImpression = $(ui.draggable).data('uuid');
+            let uuidPlate = $(ui.draggable).data('uuid');
             let uuidVisAsset = $(ui.draggable).data('inputValue');
             
-            // Trash data impressions
-            if (uuidDataImpression) {
+            // Trash plates
+            if (uuidPlate) {
                 $(ui.draggable).remove();
-                globals.stateManager.removeAll(uuidDataImpression);
+                globals.stateManager.removeAll(uuidPlate);
             }
 
             // Trash VisAssets
@@ -87,7 +87,7 @@ export function CompositionPanel() {
                 } else {
                     // Otherwise, just remove it from this tower (the user
                     // probably meant to just drag it off the tower)
-                    let impressionUuid = $(ui.draggable).parents('.data-impression').data('uuid');
+                    let impressionUuid = $(ui.draggable).parents('.plate').data('uuid');
                     let inputName = $(ui.draggable).data('inputName');
                     globals.stateManager.removePath(`impressions/${impressionUuid}/inputValues/${inputName}`);
                 }

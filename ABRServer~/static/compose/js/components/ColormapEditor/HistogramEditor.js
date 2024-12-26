@@ -141,7 +141,7 @@ export async function HistogramEditor(variableInput, keyDataInput) {
 
     // Construct a different data label depending on whether or not we have
     // linked or unlinked this variable w/the global one of the same name
-    // Add a button to break the link to a particular variable (make this range specific to the data impression)
+    // Add a button to break the link to a particular variable (make this range specific to the plate)
     let $dataLabel = $('<div>', { id: 'histogram-data-label' }).append(
         // Add a button to reset data range to original keyData
         $('<button>', {

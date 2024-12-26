@@ -1,0 +1,13 @@
+{
+    "artifactData": {
+        "colormap": "colormap.xml"
+    },
+    "artist": "Francesca Samsel",
+    "class": "linear cycle",
+    "family": "Orange",
+    "hidden": false,
+    "preview": "thumbnail.png",
+    "tags": [],
+    "type": "colormap",
+    "uuid": "fcdcc5ba-8bbf-11ea-9265-005056bae6d8"
+}

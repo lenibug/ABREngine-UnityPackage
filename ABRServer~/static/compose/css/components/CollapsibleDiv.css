@@ -40,6 +40,7 @@
     margin: 0 auto;
     padding: 0 0.5rem;
     max-height: 0;
-    overflow: hidden;
+    overflow: scroll;
     background-color: white;
 }
+

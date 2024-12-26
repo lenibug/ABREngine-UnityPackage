@@ -67,6 +67,7 @@ export class StateManager {
         this._subscribers = [];
         this._cacheSubscribers = {};
         this._caches = {};
+        this._tags = {};
 
         this._thumbnailPoll = null;
         this._thumbPollAttempts = 0;
@@ -81,7 +82,7 @@ export class StateManager {
 
     // list all the states available on the server
     async listStates() {
-        return fetch('/api/list-states');
+        return fetch('/api/list-states ');
     }
 
     // save a state to disk on the server
@@ -192,8 +193,45 @@ export class StateManager {
         });
     }
 
+    async update(updatePath, updateValue) {
+        await fetch('/api/state/' + updatePath, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'X-CSRFToken': csrftoken,
+            },
+            mode: 'same-origin',
+            body: JSON.stringify(updateValue),
+        }).then(async (resp) => {
+            if (!resp.ok) {
+                let text = await resp.text();
+                throw new Error(text);
+            }
+        });
+    }
+
+    async updateAsset(updatePath, updateValue) {
+        await fetch('/api/visassets/' + updatePath + '/', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            mode: 'same-origin',
+            body: JSON.stringify(updateValue),
+        }).then(async (resp) => {
+            let text = await resp.text();
+            if (!resp.ok) {
+                throw new Error(text);
+            }
+        }).catch(error => {
+            console.error('Error in statemanager:', error);
+        });
+        this.refreshCache('visassets');
+    }
+
+    
     // Remove all instances of a particular value from the state
-    // Particularly useful when deleting data impressions
+    // Particularly useful when deleting plates
     async removeAll(value) {
         await fetch('/api/remove/' + value, {
             method: 'DELETE',

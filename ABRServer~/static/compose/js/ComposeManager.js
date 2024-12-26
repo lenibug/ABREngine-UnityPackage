@@ -23,7 +23,7 @@ import { globals } from '../../common/globals.js';
 import { STATE_UPDATE_EVENT, CACHE_UPDATE } from '../../common/StateManager.js';
 import * as Components from './components/Components.js';
 import { COMPOSITION_LOADER_ID } from './components/Components.js';
-import { DataImpression } from './components/DataImpression.js';
+import { Plate } from './components/Plate.js';
 
 export class ComposeManager {
     constructor() {
@@ -159,7 +159,7 @@ export class ComposeManager {
         for (const imprId in impressions) {
             let impression = impressions[imprId];
             let uiDataForImpression = uiData[impression.uuid];
-            let $impression = DataImpression(impression.plateType, impression.uuid, impression.name, uiDataForImpression);
+            let $impression = Plate(impression.plateType, impression.uuid, impression.name, uiDataForImpression);
             $compositionLoader.append($impression);
         }
     }

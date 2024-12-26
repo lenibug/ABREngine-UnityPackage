@@ -60,10 +60,10 @@ export const TITLE_STRINGS = {
 //
 // Needs the following input:
 // - The entire input properties object of the item that was clicked to edit
-// - UUID of the data impression the item that was clicked to edit
+// - UUID of the plate the item that was clicked to edit
 //
 // Each dialog unit is represented as a "Module" that is included or not based
-// on inputs from the current data impression.
+// on inputs from the current plates.
 export async function EditorDialog(inputName, inputProps, impressionUuid) {
     let $editorDialog = $('<div>', {
         class: 'editor-dialog puzzle-piece-overlay-dialog' // enable puzzle pieces to float *over* dialog
@@ -82,11 +82,11 @@ export async function EditorDialog(inputName, inputProps, impressionUuid) {
     // SETUP: Figure out what "modules" are needed for this editor.
     // We need to determine the variable that is associated with the input
     // that was clicked to edit. Only display this stuff if the input is
-    // associated with a data impression.
+    // associated with a plates.
     let inputsToConsider = [];
     let variableEditorTitle = '';
     if (impressionUuid) {
-        // First, get the key data for the data impression this input is associated with
+        // First, get the key data for the plates this input is associated with
         let keyDataInput = null;
         let keyDataStatePath = globals.stateManager.findPath((s) => {
             return s.hasOwnProperty('inputGenre') &&

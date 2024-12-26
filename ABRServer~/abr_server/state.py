@@ -148,7 +148,7 @@ class State():
                 vis_asset_fails = '\nFailed to download VisAssets: ' + vis_asset_fails
             logger.warning(vis_asset_fails)
             notifier.notify(NotifierMessage(MessageTarget.VisAssetsCache))
-
+        
         return final_result
 
     def _set_path(self, sub_state, sub_path_parts, new_value):

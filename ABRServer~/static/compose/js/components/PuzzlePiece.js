@@ -41,6 +41,7 @@ export const typeMap = {
     'glyph': 'IVLab.ABREngine.GlyphVisAsset',
     'line': 'IVLab.ABREngine.LineTextureVisAsset',
     'texture': 'IVLab.ABREngine.SurfaceTextureVisAsset',
+   
 };
 
 export const gradientTypeMap = {
@@ -173,6 +174,13 @@ export function PuzzlePieceWithThumbnail(uuid, inputType, leftConnector, addClas
 
 }
 
+// export function EditTag(inputName, InputProps, addClass){
+//     let $el;
+//     let resolvedProps = resolveSchemaConsts(inputProps);
+
+
+// }
+
 // Can be either something waiting for an input or the input itself
 export function InputPuzzlePiece(inputName, inputProps, addClass) {
     let $el;
@@ -193,7 +201,7 @@ export function InputPuzzlePiece(inputName, inputProps, addClass) {
                 $el.css('cursor', 'pointer');
                 let clickEvt = (evt) => {
                     // Create a new uuid if there's no input value yet
-                    let impressionUuid = $el.parents('.data-impression').data('uuid');
+                    let impressionUuid = $el.parents('.plate').data('uuid');
                     let updatePromise = null;
                     if (!resolvedProps.inputValue) {
                         resolvedProps.inputValue = uuid();
@@ -209,6 +217,7 @@ export function InputPuzzlePiece(inputName, inputProps, addClass) {
                 $el.on('click', clickEvt);
             }
         } else {
+        
             let uuid = resolvedProps.inputValue;
             // Add the family / class to tooltip
             let visassets = globals.stateManager.getCache('visassets');
@@ -248,7 +257,8 @@ export function InputPuzzlePiece(inputName, inputProps, addClass) {
                     if (!dragging) {
                         // let gradUuid = $el.data('inputValue');
                         // VisAssetGradientDialog(gradUuid);
-                        let impressionUuid = $el.parents('.data-impression').data('uuid');
+          
+                        let impressionUuid = $el.parents('.plate').data('uuid');
                         EditorDialog(inputName, resolvedProps, impressionUuid);
                     }
                 };
@@ -303,7 +313,7 @@ export function InputPuzzlePiece(inputName, inputProps, addClass) {
             if (dragging) {
                 return;
             }
-            let impressionUuid = $(evt.target).parents('.data-impression').data('uuid');
+            let impressionUuid = $(evt.target).parents('.plate').data('uuid');
             let keyDatas = globals.stateManager.findPath((s) => {
                 return s.hasOwnProperty('inputGenre') &&
                     s['inputGenre'] == 'KeyData';
@@ -343,11 +353,13 @@ export function InputPuzzlePiece(inputName, inputProps, addClass) {
         }
         $el.attr('title', resolvedProps && resolvedProps.inputValue ? resolvedProps.inputValue : null);
     } else if (resolvedProps.inputGenre == 'Primitive') {
+
         $el = PrimitiveInput(inputName, inputName, resolvedProps);
         $el.addClass('primitive-input')
         $el.addClass('no-drag');
         $el.addClass(addClass);
     } else if (resolvedProps.inputGenre == 'PrimitiveGradient') {
+
         let gradientUuid = null;
         let args = [
             resolvedProps.inputValue,
@@ -374,7 +386,7 @@ export function InputPuzzlePiece(inputName, inputProps, addClass) {
             if (dragging) {
                 return;
             }
-            let impressionUuid = $(evt.target).parents('.data-impression').data('uuid');
+            let impressionUuid = $(evt.target).parents('.plate').data('uuid');
             // Create a new uuid if there's no input value yet
             let updatePromise = null;
             if (!resolvedProps.inputValue) {
@@ -396,7 +408,7 @@ export function InputPuzzlePiece(inputName, inputProps, addClass) {
     return $el;
 }
 
-// A puzzle piece that's already assigned on a data impression; when it's
+// A puzzle piece that's already assigned on a plate; when it's
 // removed it will send a message to the server telling it that it's removed
 export function AssignedInputPuzzlePiece(inputName, inputProps, addClass=undefined) {
     let $input = InputPuzzlePiece(inputName, inputProps, addClass);
@@ -409,7 +421,7 @@ export function AssignedInputPuzzlePiece(inputName, inputProps, addClass=undefin
             stop: (evt, _ui) => {
                 if ($(evt.target).data('draggedOut')) {
                     // Unassign this input
-                    let uuid = $(evt.target).parents('.data-impression').data('uuid');
+                    let uuid = $(evt.target).parents('.plate').data('uuid');
                     globals.stateManager.removePath(`impressions/${uuid}/inputValues/${inputName}`);
                 }
             }
@@ -463,9 +475,9 @@ function PuzzleLabel(name) {
     }
 }
 
-// Get the color variable for the data impression this input is associated with
+// Get the color variable for the plate this input is associated with
 function getColorVar($el) {
-    let impressionUuid = $el.parents('.data-impression').data('uuid');
+    let impressionUuid = $el.parents('.plate').data('uuid');
     let colorVars = globals.stateManager.findPath((s) => {
         return s.hasOwnProperty('inputGenre') &&
             s['inputGenre'] == 'Variable' && 
@@ -483,9 +495,9 @@ function getColorVar($el) {
 }
 
 
-// Get the key data for the data impression this input is associated with
+// Get the key data for the plate this input is associated with
 function getKeyData($el) {
-    let impressionUuid = $el.parents('.data-impression').data('uuid');
+    let impressionUuid = $el.parents('.plate').data('uuid');
     let keyDatas = globals.stateManager.findPath((s) => {
         return s.hasOwnProperty('inputGenre') &&
             s['inputGenre'] == 'KeyData';

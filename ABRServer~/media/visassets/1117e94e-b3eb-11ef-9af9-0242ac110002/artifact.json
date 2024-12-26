@@ -1,0 +1,15 @@
+{
+    "artifactData": {
+        "colormap": "colormap.xml"
+    },
+    "artist": "leni",
+    "class": "meow",
+    "family": "leni",
+    "hidden": false,
+    "preview": "thumbnail.png",
+    "tags": [
+        ""
+    ],
+    "type": "colormap",
+    "uuid": "1117e94e-b3eb-11ef-9af9-0242ac110002"
+}

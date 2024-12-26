@@ -1,0 +1,16 @@
+{
+    "artifactData": {
+        "image": "texturemap_0.png",
+        "normalmap": "normalmap_0.png"
+    },
+    "artist": "leni",
+    "class": "knit",
+    "family": "leni",
+    "hidden": false,
+    "preview": "thumbnail.png",
+    "tags": [
+     "fauna"
+    ],
+    "type": "texture",
+    "uuid": "243781e6-b3ec-11ef-873f-0242ac110002"
+}

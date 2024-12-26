@@ -41,11 +41,14 @@ export function DesignPanel() {
 
     // Populate the plates
     let plateTypes = Object.keys(globals.schema.definitions.Plates)
-        .map((plt) => Components.Plate(plt));
-
-    let $plateList = Components.SwatchList('Plates', plateTypes);
+        .map((plt) => Components.BlankPlate(plt));
+        
+    let $plateList = Components.SwatchList('Blank Plates', plateTypes);
     $designPanel.append($plateList);
+    
+  
 
+  
     let $clearMenuItem = $('<li>').append($('<div>', { title: 'Clear all unused VisAssets' }).append(
         $('<span>', { class: 'material-icons', text: 'delete_sweep' })
     ).append(
@@ -109,14 +112,20 @@ export function DesignPanel() {
 
     // Populate the VisAssets
     let visassets = globals.stateManager.getCache('visassets');
+ 
     let visassetsCopy = JSON.parse(JSON.stringify(visassets));
+
+
     let localVisAssets = globals.stateManager.state.localVisAssets;
     if (localVisAssets) {
+       
         for (const va in localVisAssets) {
             visassetsCopy[va] = localVisAssets[va].artifactJson;
         }
     }
     let visassetsByType = {};
+    let sortByTag = [];
+  
 
     // Break up by type
     for (const t in typeMap) {
@@ -141,6 +150,8 @@ export function DesignPanel() {
     }
 
     // ... Then, add the individual VisAssets
+    let existingTags = {};
+
     for (const va in visassetsCopy) {
         let type = visassetsCopy[va].type;
         let artifactType = visassetsCopy[va].artifactType;
@@ -153,18 +164,69 @@ export function DesignPanel() {
             inputValue: va ,
             inputType: typeMap[type]
         }
+      
         let $puzzlePiece = Components.SwatchInputPuzzlePiece(typeMap[type], mockInput);
         visassetsByType[type].push($puzzlePiece);
+
+        let tags = visassetsCopy[va].tags;
+
+        if(tags.length != 0){ 
+            for(const el in tags){
+                let tag = tags[el].toLowerCase();
+                tag = tag.trim();
+
+                if(!existingTags[tag]){
+                    existingTags[tag] = [];
+                    let $newPuzzlePiece = Components.SwatchInputPuzzlePiece(typeMap[type], mockInput);
+                    existingTags[tag].push($newPuzzlePiece);
+                }
+                else{
+                    let $newPuzzlePiece = Components.SwatchInputPuzzlePiece(typeMap[type], mockInput);    
+                    existingTags[tag].push($newPuzzlePiece);
+                    
+                }
+               
+            }
+        }
+
     }
 
     for (const t in visassetsByType) {
+
         let typeCap = t[0].toUpperCase() + t.slice(1);
         let $title = $('<span>');
         $title.append(Components.PuzzleConnector(typeMap[t]))
         $title.append($('<p>', { text: typeCap }))
         let $visAssetList = Components.SwatchList($title, visassetsByType[t]);
+            
         $designPanel.append($visAssetList);
+    
     }
+
+    let tagList = [];
+    for (const t in existingTags) { //create a dropdown for each existing tag
+        if(t){
+            let typeCap = t[0].toUpperCase() + t.slice(1);
+        let $visTitle = $('<span>');
+        $visTitle.append(Components.PuzzleConnector(typeMap[t]));
+        $visTitle.append($('<p>', { text: typeCap }));
+        let $collapsed = Components.SwatchList($visTitle, existingTags[t]);
+        tagList.push($collapsed);
+        }
+    }
+
+    let $list = $('<div>', {
+        class: 'swatch-list',
+    });
+
+    for (const $item of tagList) {
+        $list.append($item);
+    
+    }
+
+    let $result = Components.CollapsibleDiv("Sets", $list);
+    $designPanel.append($result);
+
 
     return $designPanel;
 }

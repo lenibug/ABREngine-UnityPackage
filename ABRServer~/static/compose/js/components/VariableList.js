@@ -48,6 +48,7 @@ export function VariableList(varNames, statePath, variableData, keyDataPath) {
     $el.menu().on('mouseout', (evt) => {
         outTimer = setTimeout(() => $('#variable-list').remove(), 500);
     }).on('mouseover', (evt) => {
+      
         clearTimeout(outTimer);
         outTimer = null;
     });

@@ -179,10 +179,13 @@ for p in Path(BASE_DIR).parents:
         SERVER_PATH = p.joinpath(SERVER_FOLDER)
 
 # media root is always relative to the server folder
-MEDIA_ROOT = os.path.realpath(os.path.join(SERVER_PATH, config['Media']['path']))
-if not os.path.exists(MEDIA_ROOT):
-    os.makedirs(MEDIA_ROOT)
+# MEDIA_ROOT = os.path.realpath(os.path.join(SERVER_PATH, config['Media']['path']))
+# if not os.path.exists(MEDIA_ROOT):
+#     os.makedirs(MEDIA_ROOT)
 
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # ABR-Specific settings
 DOWNLOAD_VISASSETS = config['VisAssets']['download_missing']

@@ -50,6 +50,7 @@ export function CollapsibleDiv(
             $(content).css('visibility', 'visible');
         }
     })
+    
     ).append(
         $('<div>', {
             class: 'collapsible-content rounded',

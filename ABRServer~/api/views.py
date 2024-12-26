@@ -62,6 +62,7 @@ def modify_state(request):
             return HttpResponse(err_message, status=400)
         else:
             return HttpResponse()
+        
 
 @csrf_exempt
 def remove_path(request):
@@ -118,12 +119,13 @@ def get_client_ip(request):
 def list_visassets(request):
     visasset_list = os.listdir(settings.VISASSET_PATH)
     visasset_list.sort()
+    
     for va in visasset_list:
-        if va not in VISASSET_CACHE:
-            artifact_json_path = settings.VISASSET_PATH.joinpath(va).joinpath('artifact.json')
-            if artifact_json_path.exists():
-                with open(artifact_json_path) as fin:
-                    VISASSET_CACHE[va] = json.load(fin)
+       artifact_json_path = settings.VISASSET_PATH.joinpath(va).joinpath('artifact.json')
+       if artifact_json_path.exists():
+            with open(artifact_json_path) as fin:
+                print("artifact_json_path: ", fin)
+                VISASSET_CACHE[va] = json.load(fin)
     return JsonResponse(VISASSET_CACHE)
 
 def list_datasets(request):
@@ -201,7 +203,27 @@ def remove_visasset(request, uuid):
         return HttpResponse()
     else:
         return HttpResponse('Method for download must be DELETE', status=400)
+    
 
+
+@csrf_exempt
+def modify_visasset(request, uuid):
+    item_path_parts = [str(uuid)]
+    if request.method == 'PUT':
+        print("in views.py, json.loads(request.body): ", json.loads(request.body))
+        err_message = visasset_manager.set_path(item_path_parts, json.loads(request.body))
+        if len(err_message) > 0:
+            print("in views.py, modify_visasset, err_message: ", err_message)
+            return HttpResponse(err_message, status=400)
+        else:
+            notifier.notify(NotifierMessage(MessageTarget.VisAssetsCache))
+            return HttpResponse()
+    elif request.method == 'GET':
+        resp = visasset_manager.get_path(item_path_parts)
+        return JsonResponse({'state': resp})
+    else:
+        return JsonResponse({"error": "Method for modify must be PUT"}, status=400)
+    
 def clean_state_path(method_path, request_path):
     # Parse the URL into its sub-components (we know it'll be /state/* that gets us here)
     # For paths with keys that contain slashes (/), need to quote them

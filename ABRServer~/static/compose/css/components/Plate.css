@@ -1,31 +1,165 @@
-/* components/Plate.css
- * 
- * Copyright (c) 2020, University of Minnesota
- * Author: Bridger Herman <herma582@umn.edu>
- */
-
 .plate {
-    background-color: #f8f4f4;
-    width: 10rem;
+    width: 15rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    z-index: -1;
 }
+
+
 
 .plate>* {
     padding: 0.25rem 0;
 }
 
+
+
 .plate .plate-header {
-    width: 100%;
+    width: 75%;
+    margin: auto;
     background-color: #ceedff;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 .plate .plate-header p {
-    margin: 0.25rem;
+    margin: auto;
+    text-align: center;
+}
+
+.plate .plate-header button {
+    background-color: #ceedff;
+}
+
+
+.plate .plate-summary {
+    width: 75%;
+    margin: auto;
+    background-color: #f8f4f4;
+}
+
+.plate .plate-summary .impression-controls {
+    display: flex;
+    justify-content: space-around;
+}
+
+.plate .plate-summary .impression-controls * {
+    font-size: 1rem;
+}
+
+.plate .plate-summary .summary-properties {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.plate .plate-summary .puzzle-label * {
+    width: 75%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .plate .plate-thumbnail {
-    width: 5rem;
+    width: 100%; /* Adjust based on your layout */
+    height: 100%; /* Adjust based on your layout */
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+    object-position: center; /* Centers the image within the container */
+    border-radius: 8px; /* Optional: Rounds the corners */
+}
+
+.plate .parameter-list {
+    overflow: visible;
+    width: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.plate .parameter {
+    font-size: x-small;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.plate .parameter.narrow {
+    width: fit-content;
+}
+
+.plate .parameter .parameter-label {
+    text-align: center;
+    flex-basis: 100%;
+    font-size: x-small;
+    color: #3d3d3d;
+}
+
+.input-tier.primitive-tier {
+    padding: 0.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #f8f4f4;
+    width: 75% !important; /* to match header */
+}
+
+.plate .input-tier {
+    padding: 0.5rem;
+    width: 15rem; /* match DI width */
+}
+
+.plate .impression-expand-buttons {
+    margin: auto;
+}
+.plate .impression-expand-buttons>button {
+    padding: 0;
+}
+
+/* keydata-specific styling */
+.plate .parameter.keydata {
+    width: calc(15rem * 0.75);/* to match parent plate - margin */
+    margin: auto;
+    background-color: #f8f4f4; /* to match white bg */
+    border: none;
+}
+
+/* The 'tower' that the sockets appear to connect to
+ * Width is calculated based on tower width
+ */
+.plate .parameter .parameter-label > p{
+    width: calc(15rem - 2*5rem - 2*0.2rem);
+    margin: auto;
+}
+
+.plate .input-socket {
+    position: relative;
+    margin: 0 0.2rem;
+}
+
+/* The 'tower' that the sockets appear to connect to
+ * Width is calculated:
+ * .plate - 2x .puzzle-piece - 2x .puzzle-piece margin
+ *
+ * Height is calculated from border radius
+ */
+.plate .plate-tower {
+    position: absolute;
+    background: #f8f4f4;
+    height: calc(100% - 8px);
+    z-index: -1;
+    width: calc(15rem - 2*5rem - 2*0.2rem);
+    left: calc(50% - (15rem - 2*5rem - 2*0.2rem) * 0.5);
+}
+
+.plate-editor {
+    display: flex;
+    flex-direction: column;
+}
+
+.plate-editor>* {
+    margin: auto;
+    padding: 0.5em;
 }

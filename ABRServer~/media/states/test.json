@@ -1,0 +1,81 @@
+{
+    "version": "2023.9.0",
+    "impressions": {
+        "46f50fc8-8184-4c39-b294-2d908f7ced6b": {
+            "plateType": "Glyphs",
+            "uuid": "46f50fc8-8184-4c39-b294-2d908f7ced6b",
+            "name": "DensityRadius^5",
+            "inputValues": {
+                "Glyph": {
+                    "inputType": "IVLab.ABREngine.GlyphVisAsset",
+                    "inputGenre": "VisAsset",
+                    "inputValue": "01e6339c-c9b2-11ed-ab2c-005056bae6d8"
+                },
+                "Colormap": {
+                    "inputType": "IVLab.ABREngine.ColormapVisAsset",
+                    "inputGenre": "VisAsset",
+                    "inputValue": "1117e94e-b3eb-11ef-9af9-0242ac110002"
+                },
+                "Key Data": {
+                    "inputType": "IVLab.ABREngine.PointKeyData",
+                    "inputGenre": "KeyData",
+                    "inputValue": "Demo/Wavelet/KeyData/DensityRadius^5"
+                },
+                "Color Variable": {
+                    "inputType": "IVLab.ABREngine.ScalarDataVariable",
+                    "inputGenre": "Variable",
+                    "inputValue": "Demo/Wavelet/ScalarVar/Radius"
+                }
+            },
+            "tags": [
+                "air",
+                " water"
+            ]
+        },
+        "08543ae2-18b9-443c-83f5-7581ba23120a": {
+            "plateType": "Glyphs",
+            "uuid": "08543ae2-18b9-443c-83f5-7581ba23120a",
+            "name": "test",
+            "inputValues": {
+                "Glyph": {
+                    "inputType": "IVLab.ABREngine.GlyphVisAsset",
+                    "inputGenre": "VisAsset",
+                    "inputValue": "01e6339c-c9b2-11ed-ab2c-005056bae6d8"
+                },
+                "Colormap": {
+                    "inputType": "IVLab.ABREngine.ColormapVisAsset",
+                    "inputGenre": "VisAsset",
+                    "inputValue": "c0bd8ed0-b3eb-11ef-8f5b-0242ac110002"
+                },
+                "Key Data": {
+                    "inputType": "IVLab.ABREngine.PointKeyData",
+                    "inputGenre": "KeyData",
+                    "inputValue": "Demo/Wavelet/KeyData/DensityRadius^5"
+                }
+            },
+            "tags": [
+                "air",
+                " water"
+            ]
+        }
+    },
+    "uiData": {
+        "compose": {
+            "impressionData": {
+                "46f50fc8-8184-4c39-b294-2d908f7ced6b": {
+                    "position": {
+                        "top": 143.6875,
+                        "left": 542.5
+                    }
+                },
+                "08543ae2-18b9-443c-83f5-7581ba23120a": {
+                    "position": {
+                        "top": 45.690625,
+                        "left": 137.5
+                    }
+                }
+            }
+        }
+    },
+    "name": "test"
+}

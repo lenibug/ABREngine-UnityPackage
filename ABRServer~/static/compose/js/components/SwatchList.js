@@ -24,12 +24,14 @@ import * as Components from './Components.js';
 // Items is an array of jQuery objects
 // Can specify if it should be collapsed or not
 export function SwatchList(name, items) {
+    
     let $list = $('<div>', {
         class: 'swatch-list',
     });
 
     for (const $item of items) {
         $list.append($item);
+    
     }
 
     return Components.CollapsibleDiv(name, $list);

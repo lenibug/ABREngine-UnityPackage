@@ -135,3 +135,40 @@ def get_all_strings_from_json(json_object, string_list):
     elif isinstance(json_object, dict):
         for j in json_object.values():
             get_all_strings_from_json(j, string_list)
+
+
+
+def set_path(item_path_parts, new_value):
+    try:
+        # Construct the file path from the item_path_parts
+        file_path = os.path.join(settings.VISASSET_PATH, *item_path_parts) + '/artifact.json'
+        print(f"Constructed file path: {file_path}")  # Debug statement
+        # Load the existing data
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        # Update the data with new_value
+
+        print("new_value", new_value)  # Debug statement
+
+        data['tags'] = new_value
+        print("1successfully updated tags", data['tags'])
+        # Save the updated data back to the file
+        with open(file_path, 'w') as file:
+            json.dump(data, file, indent=4)
+        
+        print("successfully updated tags", data['tags'])  # Debug statement
+        return ''
+    except Exception as e:
+        return str(e)
+
+def get_path(item_path_parts):
+    try:
+        # Construct the file path from the item_path_parts
+        file_path = os.path.join(settings.VISASSET_PATH, *item_path_parts) + '/artifact.json'
+        print(f"Constructed file path: {file_path}")  # Debug statement
+        # Load the existing data
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        return data['tags']
+    except Exception as e:
+        return str(e)

@@ -136,7 +136,7 @@ export function PrimitiveInput(inputName, shortInputName, resolvedProps) {
         val: resolvedProps.inputValue
     }).on('change', (evt) => {
         // Get the impression that this input is a part of
-        let $impression = $(evt.target).closest('.data-impression');
+        let $impression = $(evt.target).closest('.plate');
         let impressionId = $impression.data('uuid');
         let plateType = $impression.data('plateType');
         if (!plateType) {

@@ -1,0 +1,31 @@
+/* components/blankPlate.css
+ * 
+ * Copyright (c) 2020, University of Minnesota
+ * Author: Bridger Herman <herma582@umn.edu>
+ */
+
+.blankPlate {
+    background-color: #f8f4f4;
+    width: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.blankPlate>* {
+    padding: 0.025rem 0;
+}
+
+.blankPlate .blankPlate-header {
+    width: 100%;
+    background-color: #7FB8DA;
+    text-align: center;
+}
+
+.blankPlate .blankPlate-header p {
+    margin: 0.25rem;
+}
+
+.blankPlate .blankPlate-thumbnail {
+    width: 5rem;
+}
